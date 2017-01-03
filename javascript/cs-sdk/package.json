@@ -7,10 +7,13 @@
   "webpackConfig": "./webpack.config.js",
   "scripts": {
     "test": "npm run bundleSpec && karma start --single-run",
+    "test_unix": "npm run bundleSpec_unix && karma start --single-run",
     "start": "npm run server",
     "server": "webpack-dev-server --inline --hot",
     "bundleSpec": "webpack --config %npm_package_webpackSpecConfig%",
-    "bundle": "webpack --config %npm_package_webpackConfig%"
+    "bundleSpec_unix": "webpack --config $npm_package_webpackSpecConfig",
+    "bundle": "webpack --config %npm_package_webpackConfig%",
+    "bundle_unix": "webpack --config $npm_package_webpackConfig"
   },
   "author": "CloudShare Inc.",
   "license": "Apache License 2.0",
