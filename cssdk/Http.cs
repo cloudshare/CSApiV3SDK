@@ -49,7 +49,8 @@ namespace cssdk
         GET,
         POST,
         PUT,
-        DELETE
+        DELETE,
+        OPTIONS
     }
 
     public class Http : IHttp
@@ -89,6 +90,9 @@ namespace cssdk
                     return await httpClient.PutAsync(request.Path, CreateHttpContent(request));
                 case HttpMethodEnum.DELETE:
                     return await httpClient.DeleteAsync(request.Path);
+                case HttpMethodEnum.OPTIONS:
+                    var reqestMessag = new HttpRequestMessage(HttpMethod.Options, request.Path);
+                    return await httpClient.SendAsync(reqestMessag);
                 default:
                     return null;
             }

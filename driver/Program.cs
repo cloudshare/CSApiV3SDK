@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using cssdk;
@@ -27,6 +28,7 @@ namespace driver
 
         static void Main(string[] args)
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             client = CloudShareSdk.GetClient();
             if (API_ID == null || API_KEY == null)
                 WriteMissingCredentialsMessage();
@@ -228,6 +230,17 @@ namespace driver
                 Path = path,
                 QueryParams = (object)null,
                 Body = body
+            });
+        }
+
+        private static async Task<dynamic> OptionsAsync(string path, object queryParams = null)
+        {
+            return await RequestAsync(new
+            {
+                Method = HttpMethodEnum.OPTIONS,
+                Path = path,
+                QueryParams = queryParams,
+                Body = (object)null
             });
         }
 
